@@ -13,7 +13,7 @@ services:
       - 9443:9443
       - 9000:9000
     networks:
-      - caddy-net
+      - si_network
   custom-caddy:
     container_name: custom-caddy
     image: custom-caddy
@@ -29,11 +29,11 @@ services:
       - ./volumes/caddy_data:/data
       - ./volumes/caddy_config:/config
     networks:
-      - caddy-net
+      - si_network
     env_file:
       - .env
 networks:
-  caddy-net:
+  si_network:
     external: true
 
 volumes:
