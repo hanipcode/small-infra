@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    restart: always
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8000:8000
+      - 9443:9443
+    networks:
+      - caddy-net
+  custom-caddy:
+    container_name: custom-caddy
+    image: custom-caddy
+    build:
+      context: .
+      dockerfile: ./config/caddy/Dockerfile
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./config/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./volumes/caddy_data:/data
+      - ./volumes/caddy_config:/config
+    networks:
+      - caddy-net
+    env_file:
+      - .env
+networks:
+  caddy-net:
+
+volumes:
+  portainer_data:

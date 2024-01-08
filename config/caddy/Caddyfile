@@ -1,0 +1,3 @@
+example.portainer.local {
+  reverse_proxy portainer:9443
+}
