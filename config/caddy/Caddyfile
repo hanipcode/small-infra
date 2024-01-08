@@ -2,5 +2,5 @@ example.portainer.local {
   tls {
     dns digitalocean {env.DO_AUTH_TOKEN}
   }
-  reverse_proxy portainer:9443
+  reverse_proxy portainer:9000
 }
